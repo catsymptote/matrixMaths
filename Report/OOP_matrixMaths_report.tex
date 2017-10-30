@@ -1,0 +1,224 @@
+\documentclass{article}
+
+% Citations and Bibtex
+\usepackage{cite}
+% Because underscores in .bib or something.
+% I think underscores in the bibtex name/code is bad.
+	\usepackage[strings]{underscore}
+%\usepackage{url}
+
+% Sections and chapters
+%\usepackage{blindtext}
+\usepackage[utf8]{inputenc}
+
+% Margins
+\usepackage[a4paper,left=3cm,right=2cm,top=2.5cm,bottom=2.5cm]{geometry}
+
+% For tabs
+\usepackage{tabto}
+\usepackage{parskip}
+\setlength{\parindent}{15pt}
+\makeatletter
+\newcommand\tabfill[1]{%
+	\dimen@\linewidth
+	\advance\dimen@\@totalleftmargin
+	\advance\dimen@-\dimen\@curtab
+	\parbox[t]\dimen@{%
+		\leftskip=2em\hspace*{-2em}#1\ifhmode\unskip\nobreak\strut\fi
+	}%
+}
+\makeatother
+
+\textwidth=.75\textwidth % just to make wrapping more evident
+
+% For links
+\usepackage[hidelinks]{hyperref}
+\hypersetup{
+	colorlinks,
+	citecolor=black,
+	filecolor=black,
+	linkcolor=black,
+	urlcolor=black
+}
+
+% For C++ code
+\usepackage{listings}
+\usepackage{lstautogobble}	% For indentation in code (lstlisting)
+\usepackage{xcolor}
+\usepackage{textcomp}	% Said it needed this for the code
+\definecolor{listinggray}{gray}{0.9}
+\definecolor{lbcolor}{rgb}{0.9,0.9,0.9}%{1,1,1}
+\definecolor{consoleColor}{rgb}{0.7,0.7,0.7}%{1,1,1}
+%\definecolor{darkgreen}{rgb}{0.0, 0.9, 0.0}
+
+\lstdefinestyle{cpp}{
+	numbers=left,
+	backgroundcolor=\color{lbcolor},
+	basicstyle=\scriptsize\color{black},
+	identifierstyle=\ttfamily,%\color{black},
+	keywordstyle=\color[rgb]{0,0,1},
+	commentstyle=\color[rgb]{0.0,0.5,0.0},		%% Comment color
+	stringstyle=\color[rgb]{0.627,0.126,0.941},
+	numberstyle=\color[rgb]{0.205, 0.142, 0.73},
+	language=[GNU]C++
+}
+\lstdefinestyle{console}{
+	numbers=none,
+	backgroundcolor=\color{consoleColor},
+	basicstyle=\scriptsize\color[rgb]{0.0, 0.5, 0.0}
+}
+\lstdefinestyle{blackAndWhite}{
+	numbers=none,
+	backgroundcolor=\color{white},
+	basicstyle=\scriptsize\color{black}
+}
+
+\lstset{
+	autogobble=true,	% Added
+%	backgroundcolor=\color{lbcolor},
+	tabsize=4,    
+%   rulecolor=,
+%	language=[GNU]C++,
+	basicstyle=\scriptsize,
+	upquote=true,
+%	aboveskip={1.5\baselineskip},
+	aboveskip=\medskipamount,	% Changed
+	columns=fixed,
+	showstringspaces=false,
+	extendedchars=false,
+	breaklines=true,
+	prebreak = \raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},
+	frame=single,
+	rulecolor=\color{black},	% Frame color
+%	numbers=left,
+	showtabs=false,
+	showspaces=false,
+	showstringspaces=false,
+%	identifierstyle=\ttfamily,
+%	keywordstyle=\color[rgb]{0,0,1},
+%	commentstyle=\color[rgb]{0.0,0.5,0.0},		%% Comment color
+%	stringstyle=\color[rgb]{0.627,0.126,0.941},
+%	numberstyle=\color[rgb]{0.205, 0.142, 0.73}
+	%\lstdefinestyle{C++}{language=C++,style=numbers}’.
+}
+
+
+
+
+\begin{document}
+	% Make title
+	\title{Introductory Assignment - C++ Calculator}
+	\date{\today}
+	\author{Paul Knutson}
+	\maketitle
+	\thispagestyle{empty}
+	
+	% Horizontal line
+	\begin{center}
+		\line(1,0){350}
+	\end{center}
+	
+	% for prettificatory reasons
+	\hfill \break
+	% Abstract
+	
+	
+	% Horizontal line
+	\begin{center}
+		\line(1,0){350}
+	\end{center}
+	
+	\clearpage
+
+	\tableofcontents{}
+	\clearpage
+	
+	
+	
+	\section{Introduction}
+		\subsection{Part 1}
+			The first part of the C++ program for matrix multiplication should have the following specifications:
+			\begin{itemize}
+				\item Use constructor dynamic memory allocation for the matrix.
+				\item Use a getData() function to input values for the matrix.
+				\item Use show() to display the matrix.
+				\item Use mul() to multiply two matricies.
+			\end{itemize}
+		
+			Example console output:
+			\begin{lstlisting}[style=console]
+				enter m,n:2 2
+				
+				Enter the matrix of size 2x2:
+				2 3
+				2 3
+				
+				Enter the matrix of size 2x2:
+				4 5
+				4 5
+				
+				The matrix for object p:
+				2 3
+				2 3
+				
+				The matrix for object q:
+				4 5
+				4 5
+				
+				Enter resultant matrix:
+				20 25
+				20 25
+			\end{lstlisting}
+		% End of Part 1
+		
+		\subsection{Part 2}
+			The first part of the C++ program for matrix multiplication should have the following specifications:
+			\begin{itemize}
+				\item Use operator*() for matrix multiplication instead of mul()
+				\item Make operator*() as a friend function
+			\end{itemize}
+		% End of Part 2
+		
+		\subsection{Part 3}
+			The program should perform the write operatorion to a file in addition to screen.
+			
+			Output:
+			\begin{lstlisting}[style=console]
+				Enter file name> one.txt
+				Enter contents to store in file
+			\end{lstlisting}
+			
+		% End of Part 3
+	% End of section 1 - Introduction
+	
+	
+	\section{Method}
+		
+	% End of section 2 - Method
+	
+	
+	\section{Result}
+		
+	% End of section 3 - Results
+	
+	
+	\section{Discussion}
+		
+	% End of section 4 - Discussion
+	
+	% Horizontal line
+	\begin{center}
+		\line(1,0){350}
+	\end{center}
+	-
+	\\ \\ \\ \\ \\ \\
+	GitHub repository for the project: \\
+	\href{https://github.com/catsymptote/matrixMaths}{Web repo} \\
+	\href{https://github.com/catsymptote/matrixMaths.git}{.git}
+	
+	
+	\clearpage
+	
+	\bibliographystyle{plain}
+	\bibliography{biblib}
+\end{document}

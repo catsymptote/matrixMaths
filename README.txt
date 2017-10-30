@@ -1,5 +1,5 @@
 Assigment no 2 in C++
- Lever oppgave
+
 Leveres innen 20 nov innen 23:59  Poeng 1 Må leveres en filopplasting Tilgjengelig 25 okt i 0:00–21 nov i 23:59 28 dager
 Write a c++ program for matrix multiplication with following specifications
 
