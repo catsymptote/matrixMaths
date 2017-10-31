@@ -4,6 +4,7 @@
 *.res
 *.pdf
 ignore/
+Report/calc*
 
 
 ### Codeblocks / C++
