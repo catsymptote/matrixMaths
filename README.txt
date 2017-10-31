@@ -12,33 +12,23 @@ Example Output:
 enter m,n:2 2
 
 Enter the matrix of size2x2
-
 2 3
-
 2 3
 
 Enter the matrix of size2x2
-
 4 5
-
 4 5
 
 The matrix for object p:
-
 2 3
-
 2 3
 
 The matrix for object q:
-
 4 5
-
 4 5
 
 The resultant matrix
-
 20 25
-
 20 25
 
  
