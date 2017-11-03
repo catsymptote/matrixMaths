@@ -5,6 +5,8 @@
 *.pdf
 ignore/
 Report/calc*
+*.layout
+*.depend
 
 
 ### Codeblocks / C++
