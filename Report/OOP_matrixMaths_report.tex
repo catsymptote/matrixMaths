@@ -41,6 +41,11 @@
 	urlcolor=black
 }
 
+
+% For maths
+\usepackage{mathtools}
+
+
 % For C++ code
 \usepackage{listings}
 \usepackage{lstautogobble}	% For indentation in code (lstlisting)
@@ -193,7 +198,69 @@
 	
 	
 	\section{Method}
-		
+		\subsection{Matrix multiplication}
+			\tiny
+			$
+				\begin{bmatrix}
+					A_{0,0}	& A_{0, 1}	& A_{0,2} \\\\
+					A_{1,0}	& A_{1, 1}	& A_{1,2} \\\\
+					A_{2,0}	& A_{2, 1}	& A_{2,2}
+				\end{bmatrix}
+				\begin{bmatrix}
+					B_{0,0}	& B_{0, 1}	& B_{0,2} \\\\
+					B_{1,0}	& B_{1, 1}	& B_{1,2} \\\\
+					B_{2,0}	& B_{2, 1}	& B_{2,2}
+				\end{bmatrix}
+			$ \\\\
+			$
+				=
+				\begin{bmatrix}
+					A_{0,0}B_{0,0} + A_{0,1}B_{1,0} + A_{0,2}B_{2,0} &
+					A_{0,0}B_{0,1} + A_{0,1}B_{1,1} + A_{0,2}B_{2,1} &
+					A_{0,0}B_{0,2} + A_{0,1}B_{1,2} + A_{0,2}B_{2,2} \\\\
+					
+					A_{1,0}B_{0,0} + A_{1,1}B_{1,0} + A_{1,2}B_{2,0} &
+					A_{1,0}B_{0,1} + A_{1,1}B_{1,1} + A_{1,2}B_{2,1} &
+					A_{1,0}B_{0,2} + A_{1,1}B_{1,2} + A_{1,2}B_{2,2} \\\\
+					
+					A_{2,0}B_{0,0} + A_{2,1}B_{1,0} + A_{2,2}B_{2,0} &
+					A_{2,0}B_{0,1} + A_{2,1}B_{1,1} + A_{2,2}B_{2,1} &
+					A_{2,0}B_{0,2} + A_{2,1}B_{1,2} + A_{2,2}B_{2,2}
+				\end{bmatrix}
+			$\\\\\\
+			$
+				A = 
+				\begin{bmatrix}
+					A_{00} & A_{01} \\
+					A_{10} & A_{11} \\
+					A_{20} & A_{21}
+				\end{bmatrix}
+				,
+				B = 
+				\begin{bmatrix}
+					B_{00} & B_{01} \\
+					B_{10} & B_{11} \\
+					B_{20} & B_{21}
+				\end{bmatrix}
+			$ \\\\
+			$
+				AB = 
+				\begin{bmatrix}
+					A_{00}B_{00} + A_{01}B_{10} & A_{00}B_{01} + A_{01}B_{11} & A_{00}B_{02} + A_{01}B_{12} \\
+					A_{10}B_{00} + A_{01}B_{10} & A_{10}B_{01} + A_{01}B_{11} & A_{10}B_{02} + A_{01}B_{12} \\
+					A_{20}B_{00} + A_{01}B_{10} & A_{20}B_{01} + A_{01}B_{11} & A_{20}B_{02} + A_{01}B_{12}
+				\end{bmatrix}
+			$\\\\
+			$	
+				BA = 
+				\begin{bmatrix}
+					B_{00}A_{00} + B_{01}A_{10} + B_{02}A_{20} & B_{00}A_{01} + B_{01}A_{11} + B_{02}A_{21} \\
+					B_{10}A_{00} + B_{01}A_{10} + B_{02}A_{20} & B_{10}A_{01} + B_{01}A_{11} + B_{02}A_{21} \\
+					B_{20}A_{00} + B_{01}A_{10} + B_{02}A_{20} & B_{20}A_{01} + B_{01}A_{11} + B_{02}A_{21}
+				\end{bmatrix}
+			$
+			\normalsize
+		% End of subsection - Matrix multiplication
 	% End of section 2 - Method
 	
 	
