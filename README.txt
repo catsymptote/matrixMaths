@@ -9,8 +9,8 @@ Part 1>
 	Use getdata() function to input values for matrix
 	Use show() to display the matrix
 	Use mul() to multiply two matrices
+	
 	Example Output:
-
 		enter m,n:2 2
 
 		Enter the matrix of size2x2
