@@ -12,18 +12,25 @@ typedef std::vector< std::vector<double> > matrix;
 class matrixMaths
 {
     public:
+        matrixMaths();
         matrixMaths(matrix A, matrix B);
         virtual ~matrixMaths();
 
         void setMatrix(matrix A, int matNum);
         matrix getMatrix(int matNum);
 
-        void show(matrix matx);
+        void getDataFromUser(int matNum);
+        matrix& getMatrixRef(int matNum);
+
+        void show(matrix matx, std::string txt = "");
 
         //matrix getData(); // setMatrix()
         void show(int matNum);
 
         matrix mul(matrix A, matrix B);
+
+        matrix A;
+        matrix B;
 
         //std::vector<std::vector<double>> mul();
 
@@ -32,8 +39,7 @@ class matrixMaths
     protected:
 
     private:
-        matrix A;
-        matrix B;
+
 
         /// Use references here:
         void setA(matrix matx);
