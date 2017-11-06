@@ -76,20 +76,24 @@ void matrix::show(std::string txt)
 }
 
 
-void matrix::mulThis(matrix &X, matrix &Y)
+//void matrix::mulThis(matrix &X, matrix &Y)
+matrix matrix::mul(matrix &X)
 {
-    if(X.n != Y.m)
+    /// Local variables
+    int m = this->m;
+    int n = X.n;
+    int t = this->n;
+
+    matrix Z;
+    Z.make(m, n);
+
+    if(this->n != X.m)
     {
         std::cout << "Error. A.n != Y.m. Matrix multiplication impossible." << std::endl;
-        return;
+        return(Z);
     }
 
-
-    m = X.m;
-    n = Y.n;
-    int t = X.n;
-
-    makeMatrix();
+    //makeMatrix();
     //double ** Xmx = X.mx;
     //double ** Ymx = Y.mx;
     //std::cout << sizeof(Xmx) << std::endl;
@@ -110,26 +114,21 @@ void matrix::mulThis(matrix &X, matrix &Y)
             {
                 //std::cout << "t: " << t << std::endl;
                 //std::cout << "i:" << i << ", j:" << j << ", k:" << k << std::endl;
-                tmp += X.mx[i][k] * Y.mx[k][j];
+                tmp += mx[i][k] * X.mx[k][j];
                 //std::cout << "A[m][t]: " << A[m][t] << ", B[t][n]: " << B[t][n] << std::endl;
             }
-            mx[i][j] = tmp;
+            Z.mx[i][j] = tmp;
         }
     }
+    return(Z);
 }
 
-double** matrix::mul(matrix &X, matrix &Y)
-{
-    mulThis(X, Y);
-    return mx;
-}
 
-/*
-operator*(matrix &x, matrix &y)
-{
+//matrix matrix::mul(matrix &X)
+//{
+//
+//}
 
-}
-*/
 
 void matrix::makeMatrix()
 {
@@ -180,6 +179,73 @@ void matrix::printFileWA(std::string filename)
     */
 
     printToFile(text, "_WA_" + filename);
+}
+
+
+
+/// Operator overloading
+matrix matrix::operator*(matrix &X)
+{
+    //if(!bMul(X))
+    //    std::cout << "Illegal matrix multiplication!" << std::endl;
+    //    return;
+    matrix Y;
+    Y = mul(X);
+    return(Y);
+}
+
+matrix matrix::operator+(matrix &X)
+{
+    //if(!bAdd())
+    //    std::cout << "Illegal matrix addition!" << std::endl;
+    //    return;
+
+    matrix Y;
+    Y.make(X.m, X.n);
+
+    for (int i = 0; i < m; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            Y.mx[i][j] = mx[i][j] + X.mx[i][j];
+        }
+    }
+    return(Y);
+}
+
+
+/// Return true if able to multiply matrices.
+bool matrix::bMul(matrix &X, matrix &Y)
+{
+    if(X.n != Y.m)
+        return false;
+
+    return true;
+}
+
+/// Return true if able to add matrices.
+bool matrix::bAdd(matrix &X, matrix &Y)
+{
+    if(X.m != Y.m)
+        return false;
+    if(X.n != Y.n)
+        return false;
+
+    return true;
+}
+
+
+void matrix::make(int m, int n)
+{
+    /// Make array and pointer
+    double** mtx = new double*[m];
+    for(int i = 0; i < m; i++)
+    {
+        mtx[i] = new double[n];
+    }
+    mx = mtx;
+    this->m = m;
+    this->n = n;
 }
 
 

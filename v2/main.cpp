@@ -19,7 +19,8 @@ int main()
 
     A.getData();
     B.getData();
-    C.mulThis(A, B);
+    //C = A.mul(B);
+    C = A * B;
 
     A.show("A");
     B.show("B");

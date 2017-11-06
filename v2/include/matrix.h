@@ -8,10 +8,6 @@
 //typedef matrix[][] matrix;
 
 
-
-
-
-
 class matrix
 {
     public:
@@ -20,11 +16,22 @@ class matrix
 
         void getData();
         void show(std::string txt = "");
-        double** mul(matrix &X, matrix &Y);
-        void mulThis(matrix &X, matrix &Y);
+        //double** mul(matrix &X, matrix &Y);
+        //matrix mul(matrix &X)
+        //void mulThis(matrix &X, matrix &Y);
+        matrix mul(matrix &X);
+        void make(int m, int n);
 
         void printFileWA(std::string filename);
         void printFile(std::string filename);
+
+        /// Operator overloading.
+        matrix operator*(matrix &X);
+        matrix operator+(matrix &X);
+
+        /// Operator legality test functions.
+        bool bMul(matrix &X, matrix &Y);
+        bool bAdd(matrix &X, matrix &Y);
 
         int m, n;
         double** mx;
