@@ -124,7 +124,7 @@ double** matrix::mul(matrix &X, matrix &Y)
     return mx;
 }
 
-
+/*
 double** matrix::mull(matrix &X)
 {
 
@@ -135,7 +135,7 @@ double** matrix::makeMatrixx()
 {
 
 }
-
+*/
 
 void matrix::makeMatrix()
 {
@@ -222,7 +222,7 @@ void matrix::printToFile(std::string text, std::string filename)
 }
 
 
-
+/*
 /// Operator overloading
 matrix matrix::operator+(matrix &X)
 {
@@ -237,3 +237,4 @@ matrix matrix::operator*(matrix &X)
 
     return(Y);
 }
+*/

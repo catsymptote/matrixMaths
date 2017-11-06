@@ -26,9 +26,11 @@ class matrix
         void printFileWA(std::string filename);
         void printFile(std::string filename);
 
+        /*
         /// Operator overloading
         matrix operator+(matrix &X);
         matrix operator*(matrix &X);
+        */
 
         int m, n;
         double** mx;
