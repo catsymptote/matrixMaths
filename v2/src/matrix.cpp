@@ -1,42 +1,35 @@
 #include "matrix.h"
 
 
-int m, n;
-double **mx;
+int m, n;       /// Size of matrix.
+double **mx;    /// Pointer to matrix.
 
 
-matrix::matrix()// m, int n)// : mx(new int[m][n])
+/// Constructors and destructor.
+matrix::matrix(){}
+/// Not in use
+matrix::matrix(int m, int n)
 {
-    //ctor
-    /*
     this->m = m;
     this->n = n;
-    //const int mm = m;
-    //const int nn = n;
-    //mx(new int[m][n]){};
-    double** mtx = new double*[m];
-    for(int i = 0; i < m; i++)
-    {
-        mtx[i] = new double[n];
-    }
-    mx = mtx;
-    //this->mx = mtx;
-    */
 }
-
-
+matrix::matrix(double **mx, int m, int n)
+{
+    this->mx = mx;
+    this->m = m;
+    this->n = n;
+}
 matrix::~matrix()
 {
-    //dtor
+    //std::cout << "DIEDIEDIE!!" << std::endl;
 }
 
 
+/// Get's data from the user.
 void matrix::getData()
 {
     std::cout << "Input matrix dimensions: m n> ";
     std::cin >> m >> n;
-
-    //double mat[m][n];
 
     /// Make array and pointer
     double** mtx = new double*[m];
@@ -53,14 +46,14 @@ void matrix::getData()
             std::cin >> mx[i][j];
         }
     }
-    //mx = mat;
 }
 
 
+/// cout's the matrix (with matrix name).
 void matrix::show(std::string txt)
 {
     std::cout << "\n" << txt;
-    std::cout << "\n----------" << std::endl;
+    std::cout << "\n--------------------------------------------------" << std::endl;
     for(int i = 0; i < m; i++)
     {
         for(int j = 0; j < n; j++)
@@ -72,65 +65,13 @@ void matrix::show(std::string txt)
             std::cout << "\n\n";
         }
     }
-    std::cout << "\n----------" << std::endl;
+    std::cout << "\n--------------------------------------------------" << std::endl;
+    printFile(txt);
 }
 
 
-//void matrix::mulThis(matrix &X, matrix &Y)
-matrix matrix::mul(matrix &X)
-{
-    /// Local variables
-    int m = this->m;
-    int n = X.n;
-    int t = this->n;
-
-    matrix Z;
-    Z.make(m, n);
-
-    if(this->n != X.m)
-    {
-        std::cout << "Error. A.n != Y.m. Matrix multiplication impossible." << std::endl;
-        return(Z);
-    }
-
-    //makeMatrix();
-    //double ** Xmx = X.mx;
-    //double ** Ymx = Y.mx;
-    //std::cout << sizeof(Xmx) << std::endl;
-    //std::cout << sizeof(Xmx[0]) << std::endl;
-
-    //std::cout << "m:" << m << ", n:" << n << ", t:" << t << std::endl;
-    //std::cout << "X.mx[0][0]:" << X.mx[0][0] << std::endl;
-    //std::cout << "Y.mx[0][0]:" << Y.mx[0][0] << std::endl;
-
-    double tmp;
-    for (int i = 0; i < m; i++)
-    {
-        for (int j = 0; j < n; j++)
-        {
-            tmp = 0;
-            //std::cout << "m:n - " << m << ":" << n << std::endl;
-            for (int k = 0; k < t; k++)
-            {
-                //std::cout << "t: " << t << std::endl;
-                //std::cout << "i:" << i << ", j:" << j << ", k:" << k << std::endl;
-                tmp += mx[i][k] * X.mx[k][j];
-                //std::cout << "A[m][t]: " << A[m][t] << ", B[t][n]: " << B[t][n] << std::endl;
-            }
-            Z.mx[i][j] = tmp;
-        }
-    }
-    return(Z);
-}
-
-
-//matrix matrix::mul(matrix &X)
-//{
-//
-//}
-
-
-void matrix::makeMatrix()
+/// Pseudo constructor (for the matrix).
+void matrix::make(int m, int n)
 {
     /// Make array and pointer
     double** mtx = new double*[m];
@@ -139,78 +80,86 @@ void matrix::makeMatrix()
         mtx[i] = new double[n];
     }
     mx = mtx;
+    this->m = m;
+    this->n = n;
 }
 
 
-
-void matrix::printFileWA(std::string filename)
+/// Matrix multiplication.
+matrix matrix::mul(matrix &X, matrix &Y)
 {
-    std::string text;
+    /// Local variables
+    int m = X.m;
+    int n = Y.n;
+    int t = X.n;
 
-    text += "[[";
-    /*
-    for(int i = 0; i < m; i++)
-    {
-        text += "[";
-    }
-    */
+    matrix Z;
+    Z.make(m, n);
 
-    for(int i = 0; i < m; i++)
+    double tmp;
+    for (int i = 0; i < m; i++)
     {
-        for(int j = 0; j < n; j++)
+        for (int j = 0; j < n; j++)
         {
-            //text += std::to_string(mx[i][j]);
-            std::stringstream ss;
-            ss << mx[i][j];
-            text += ss.str();
-            if(j != n-1)
-                text += ", ";
+            tmp = 0;
+            for (int k = 0; k < t; k++)
+            {
+                tmp += X.mx[i][k] * Y.mx[k][j];
+            }
+            Z.mx[i][j] = tmp;
         }
-        if(i != m-1)
-            text += "], [";
     }
-
-    text += "]]";
-    /*
-    for(int i = 0; i < m; i++)
-    {
-        text += "]";
-    }
-    */
-
-    printToFile(text, "_WA_" + filename);
+    return(Z);
 }
 
 
-
-/// Operator overloading
-matrix matrix::operator*(matrix &X)
+/// Matrix addition.
+matrix matrix::add(matrix &X, matrix &Y)
 {
-    //if(!bMul(X))
-    //    std::cout << "Illegal matrix multiplication!" << std::endl;
-    //    return;
-    matrix Y;
-    Y = mul(X);
-    return(Y);
-}
+    int m = X.m;
+    int n = X.n;
 
-matrix matrix::operator+(matrix &X)
-{
-    //if(!bAdd())
-    //    std::cout << "Illegal matrix addition!" << std::endl;
-    //    return;
-
-    matrix Y;
-    Y.make(X.m, X.n);
+    matrix Z;
+    Z.make(m, n);
 
     for (int i = 0; i < m; i++)
     {
         for (int j = 0; j < n; j++)
         {
-            Y.mx[i][j] = mx[i][j] + X.mx[i][j];
+            Z.mx[i][j] = X.mx[i][j] + Y.mx[i][j];
         }
     }
-    return(Y);
+    return(Z);
+}
+
+
+/// Operator overloading.
+matrix operator+(matrix &X, matrix &Y)
+{
+    matrix Z;
+
+    if(!Z.bAdd(X, Y))
+    {
+        std::cout << "ERROR! !(A.m != Y.m && A.n != Y.n). Matrix addition impossible." << std::endl;
+        return(X);
+    }
+
+    Z = Z.add(X, Y);
+    return(Z);
+}
+
+matrix operator*(matrix &X, matrix &Y)
+{
+    matrix Z;
+
+    if(!Z.bMul(X, Y))
+    {
+        std::cout << "ERROR! A.n != Y.m. Matrix multiplication impossible." << std::endl;
+        return(X);
+    }
+
+    Z = Z.mul(X, Y);
+    return(Z);
 }
 
 
@@ -235,30 +184,42 @@ bool matrix::bAdd(matrix &X, matrix &Y)
 }
 
 
-void matrix::make(int m, int n)
-{
-    /// Make array and pointer
-    double** mtx = new double*[m];
-    for(int i = 0; i < m; i++)
-    {
-        mtx[i] = new double[n];
-    }
-    mx = mtx;
-    this->m = m;
-    this->n = n;
-}
-
-
-void matrix::printFile(std::string filename)
+/// Print result to file.
+/// Creates string with formatted input for Wolfram Alpha (maths debugging).
+void matrix::printFileWA(std::string name)
 {
     std::string text;
-    text = std::to_string(m) + "," + std::to_string(n) + "\n";
+    text += name + " = ";
+    text += "[[";
+    for(int i = 0; i < m; i++)
+    {
+        for(int j = 0; j < n; j++)
+        {
+            std::stringstream ss;
+            ss << mx[i][j];
+            text += ss.str();
+            if(j != n-1)
+                text += ", ";
+        }
+        if(i != m-1)
+            text += "], [";
+    }
+    text += "]]\n";
+
+    printToFile(text, "files/WA.txt");
+}
+
+/// Creates string of matrix operations to be saved to file.
+void matrix::printFile(std::string name)
+{
+    std::string text;
+    text += name + "\n";
+    text += std::to_string(m) + "," + std::to_string(n) + "\n";
 
     for(int i = 0; i < m; i++)
     {
         for(int j = 0; j < n; j++)
         {
-            //text += std::to_string(mx[i][j]) + "\t";
             std::stringstream ss;
             ss << mx[i][j];
             text += ss.str();
@@ -268,13 +229,12 @@ void matrix::printFile(std::string filename)
         text += "\n";
     }
     text += "\n";
-    printToFile(text, "_F_" + filename);
+    printToFile(text, "files/file.txt");
 }
 
-
+/// Creates the file based on string.
 void matrix::printToFile(std::string text, std::string filename)
 {
-    // write string to file
     std::ofstream file;
     file.open(filename, std::ofstream::app);
     file << text;
