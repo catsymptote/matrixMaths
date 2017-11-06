@@ -1,5 +1,6 @@
 ### Other
 *.7z
+*.zip
 *.png
 *.res
 *.pdf
@@ -9,6 +10,7 @@ Report/calc*
 *.depend
 .vscode/
 *.txt
+ex/
 
 
 ### Codeblocks / C++
