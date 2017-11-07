@@ -4,8 +4,11 @@
 \usepackage{cite}
 % Because underscores in .bib or something.
 % I think underscores in the bibtex name/code is bad.
-	\usepackage[strings]{underscore}
+\usepackage[strings]{underscore}
 %\usepackage{url}
+
+% Captions
+\usepackage[font=scriptsize]{caption}
 
 % Sections and chapters
 %\usepackage{blindtext}
@@ -44,7 +47,13 @@
 
 % For maths
 \usepackage{mathtools}
+\usepackage{amsmath,amsfonts,amssymb,amsthm, bm}
 
+% For boxes or something
+\usepackage{mdframed}
+
+% For frames/boxes
+%\usepackage{tcolorbox}
 
 % For C++ code
 \usepackage{listings}
@@ -112,7 +121,7 @@
 
 \begin{document}
 	% Make title
-	\title{Introductory Assignment - C++ Calculator}
+	\title{C++ Assignment - Matrix Maths}
 	\date{\today}
 	\author{Paul Knutson}
 	\maketitle
@@ -121,15 +130,15 @@
 	% Horizontal line
 	\begin{center}
 		\line(1,0){350}
-	\end{center}
+	%\end{center}
 	
 	% for prettificatory reasons
 	\hfill \break
 	% Abstract
-	
+	The assignment is to create a matrix multiplier program. It consists of three elements, where each can be cumulatively added to the program. It is to be coded in C++.
 	
 	% Horizontal line
-	\begin{center}
+	%\begin{center}
 		\line(1,0){350}
 	\end{center}
 	
@@ -147,7 +156,7 @@
 				\item Use constructor dynamic memory allocation for the matrix.
 				\item Use a getData() function to input values for the matrix.
 				\item Use show() to display the matrix.
-				\item Use mul() to multiply two matricies.
+				\item Use mul() to multiply two matrices.
 			\end{itemize}
 		
 			Example console output:
@@ -199,144 +208,144 @@
 	
 	\section{Method}
 		\subsection{Matrix multiplication}
-			\tiny
-			$
-				\begin{bmatrix}
-					A_{0,0}	& A_{0, 1}	& A_{0,2} \\\\
-					A_{1,0}	& A_{1, 1}	& A_{1,2} \\\\
-					A_{2,0}	& A_{2, 1}	& A_{2,2}
-				\end{bmatrix}
-				\begin{bmatrix}
-					B_{0,0}	& B_{0, 1}	& B_{0,2} \\\\
-					B_{1,0}	& B_{1, 1}	& B_{1,2} \\\\
-					B_{2,0}	& B_{2, 1}	& B_{2,2}
-				\end{bmatrix}
-			$ \\\\
-			$
-				=
-				\begin{bmatrix}
-					A_{0,0}B_{0,0} + A_{0,1}B_{1,0} + A_{0,2}B_{2,0} &
-					A_{0,0}B_{0,1} + A_{0,1}B_{1,1} + A_{0,2}B_{2,1} &
-					A_{0,0}B_{0,2} + A_{0,1}B_{1,2} + A_{0,2}B_{2,2} \\\\
-					
-					A_{1,0}B_{0,0} + A_{1,1}B_{1,0} + A_{1,2}B_{2,0} &
-					A_{1,0}B_{0,1} + A_{1,1}B_{1,1} + A_{1,2}B_{2,1} &
-					A_{1,0}B_{0,2} + A_{1,1}B_{1,2} + A_{1,2}B_{2,2} \\\\
-					
-					A_{2,0}B_{0,0} + A_{2,1}B_{1,0} + A_{2,2}B_{2,0} &
-					A_{2,0}B_{0,1} + A_{2,1}B_{1,1} + A_{2,2}B_{2,1} &
-					A_{2,0}B_{0,2} + A_{2,1}B_{1,2} + A_{2,2}B_{2,2}
-				\end{bmatrix}
-			$\\\\\\
-			$
-				A = 
-				\begin{bmatrix}
-					A_{00} & A_{01} \\
-					A_{10} & A_{11} \\
-					A_{20} & A_{21}
-				\end{bmatrix}
-				,
-				B = 
-				\begin{bmatrix}
-					B_{00} & B_{01} & B_{10} \\
-					B_{11} & B_{20} & B_{21}
-				\end{bmatrix}
-			$ \\\\
-			$
-				AB = 
-				\begin{bmatrix}
-					A_{00}B_{00} + A_{01}B_{10} & A_{00}B_{01} + A_{01}B_{11} & A_{00}B_{02} + A_{01}B_{12} \\
-					A_{10}B_{00} + A_{01}B_{10} & A_{10}B_{01} + A_{01}B_{11} & A_{10}B_{02} + A_{01}B_{12} \\
-					A_{20}B_{00} + A_{01}B_{10} & A_{20}B_{01} + A_{01}B_{11} & A_{20}B_{02} + A_{01}B_{12}
-				\end{bmatrix}
-			$\\\\
-			$	
-				BA = 
-				\begin{bmatrix}
-					B_{00}A_{00} + B_{01}A_{10} + B_{02}A_{20} & B_{00}A_{01} + B_{01}A_{11} + B_{02}A_{21} \\
-					B_{10}A_{00} + B_{01}A_{10} + B_{02}A_{20} & B_{10}A_{01} + B_{01}A_{11} + B_{02}A_{21} \\
-					B_{20}A_{00} + B_{01}A_{10} + B_{02}A_{20} & B_{20}A_{01} + B_{01}A_{11} + B_{02}A_{21}
-				\end{bmatrix}
-			$ \\\\\\
-			$
-			A = 
-			\begin{bmatrix}
-				A_{00} & A_{01} & A_{02} \\\\
-				A_{10} & A_{11} & A_{12}
-			\end{bmatrix}
-			, B =
-			\begin{bmatrix}
-				B_{00} & B_{01} & B_{02} & B_{03} \\\\
-				B_{10} & B_{11} & B_{12} & B_{13} \\\\
-				B_{20} & B_{21} & B_{22} & B_{23}
-			\end{bmatrix}
-			$ \\\\\\
-			$
-			AB = 
-			\begin{bmatrix}
-				A_{00}B_{00} + A_{01}B_{10} + A_{02}B_{20} &
-				A_{00}B_{01} + A_{01}B_{11} + A_{02}B_{21} &
-				A_{00}B_{02} + A_{01}B_{12} + A_{02}B_{22} &
-				A_{00}B_{03} + A_{01}B_{13} + A_{02}B_{23} \\\\
-				
-				A_{10}B_{00} + A_{11}B_{10} + A_{12}B_{20} &
-				A_{10}B_{01} + A_{11}B_{11} + A_{12}B_{21} &
-				A_{10}B_{02} + A_{11}B_{12} + A_{12}B_{22} &
-				A_{10}B_{03} + A_{11}B_{13} + A_{12}B_{23} 
-			\end{bmatrix}
-			$\\\\\\
-			$
-			A = 
-			\begin{bmatrix}
-				1 & 2 & 3 \\\\
-				4 & 5 & 6
-			\end{bmatrix}
-			, B =
-			\begin{bmatrix}
-				1 & 2 & 3 & 4 \\\\
-				5 & 6 & 7 & 8 \\\\
-				9 & 10 & 11 & 12
-			\end{bmatrix}
-			$ \\\\\\
-			$
-			AB = 
-			\begin{bmatrix}
-				1*1 + 2*5 + 3*9 &
-				1*2 + 2*6 + 3*10 &
-				1*3 + 2*7 + 3*11 &
-				1*4 + 2*8 + 3*12 \\\\
-				
-				4*1 + 5*5 + 6*9 &
-				4*2 + 5*6 + 6*10 &
-				4*3 + 5*7 + 6*11 &
-				4*4 + 5*8 + 6*12
-			\end{bmatrix} \\\\\\
-			AB = 
-			\begin{bmatrix}
-				1 + 10 + 27 &
-				2 + 12 + 30 &
-				3 + 14 + 33 &
-				4 + 16 + 36 \\\\
-				
-				4 + 25 + 54 &
-				8 + 30 + 60 &
-				12 + 35 + 66 &
-				16 + 40 + 72
-			\end{bmatrix} \\\\\\
-			AB = 
-			\begin{bmatrix}
-				38 &
-				54 &
-				50 &
-				56 \\\\
-				
-				83 &
-				98 &
-				113 &
-				128
-			\end{bmatrix}
-			$\\\\\\
+		A matrix multiplication between two matrices $A$ and $B$ of size $m \times t$ and $t \times n$ will result in a matrix of size $m \times p$, and $t$ number of addends per index of the matrix. \\\\
+			%\tiny \\
+			%\begin{figure}
+				\tiny
+				\fbox{\begin{minipage}{\textwidth}
+					$
+						X = 
+						\begin{bmatrix}
+							a & b \\
+							c & d
+						\end{bmatrix}
+						, Y =
+						\begin{bmatrix}
+							e & f \\
+							g & h
+						\end{bmatrix}
+						, XY = 
+						\begin{bmatrix}
+							ae + bg & af + bh \\
+							ce + dg & cf + gh
+						\end{bmatrix}
+					$
+				\end{minipage}}
+				\captionof{figure}{Simple matrix multiplication example}
+				%\caption{Simple matrix multiplication example}
+			%\end{figure}
+			\hfill \break \\\\
+			%\begin{figure}
+				\tiny
+				\fbox{\begin{minipage}{\textwidth}
+					$
+						Q = 
+						\begin{bmatrix}
+							X_{00} & X_{01} \\
+							X_{10} & X_{11}
+						\end{bmatrix}
+						, P =
+						\begin{bmatrix}
+							Y_{00} & Y_{01} \\
+							Y_{10} & Y_{11}
+						\end{bmatrix}
+						, QP = 
+						\begin{bmatrix}
+							X_{00}Y_{00} + X_{01}Y_{10} & X_{00}Y_{01} + X_{01}Y_{11} \\
+							X_{10}Y_{00} + X_{11}Y_{10} & X_{10}Y_{01} + X_{11}Y_{11}
+						\end{bmatrix}
+					$
+				\end{minipage}}
+				\captionof{figure}{Simple matrix multiplication indexed example}
+				%\caption{Simple matrix multiplication example}
+			%\end{figure} \\
+			\hfill \break \\\\
+			%\begin{figure}
+				\tiny
+				\fbox{\begin{minipage}{\textwidth}
+					%\begin{equation}
+					$
+						A: 2 \times 3, B: 3 \times 4, AB: 2 \times 4 \\
+						\begin{aligned}
+							A &= 
+							\begin{bmatrix}
+								A_{00} & A_{01} & A_{02} \\
+								A_{10} & A_{11} & A_{12}
+							\end{bmatrix}
+							, B =
+							\begin{bmatrix}
+								B_{00} & B_{01} & B_{02} & B_{03} \\
+								B_{10} & B_{11} & B_{12} & B_{13} \\
+								B_{20} & B_{21} & B_{22} & B_{23}
+							\end{bmatrix} \\
+							AB &= 
+							\begin{bmatrix}
+								A_{00}B_{00} + A_{01}B_{10} & A_{00}B_{01} + A_{01}B_{11} & A_{00}B_{02} + A_{01}B_{12} \\
+								A_{10}B_{00} + A_{01}B_{10} & A_{10}B_{01} + A_{01}B_{11} & A_{10}B_{02} + A_{01}B_{12} \\
+								A_{20}B_{00} + A_{01}B_{10} & A_{20}B_{01} + A_{01}B_{11} & A_{20}B_{02} + A_{01}B_{12}
+							\end{bmatrix} \\
+							BA &= 
+							\begin{bmatrix}
+								B_{00}A_{00} + B_{01}A_{10} + B_{02}A_{20} & B_{00}A_{01} + B_{01}A_{11} + B_{02}A_{21} \\
+								B_{10}A_{00} + B_{01}A_{10} + B_{02}A_{20} & B_{10}A_{01} + B_{01}A_{11} + B_{02}A_{21} \\
+								B_{20}A_{00} + B_{01}A_{10} + B_{02}A_{20} & B_{20}A_{01} + B_{01}A_{11} + B_{02}A_{21}
+							\end{bmatrix} \\
+							A &= 
+							\begin{bmatrix}
+								1 & 2 & 3 \\
+								4 & 5 & 6
+							\end{bmatrix}
+							, B =
+							\begin{bmatrix}
+								1 & 2 & 3 & 4 \\
+								5 & 6 & 7 & 8 \\
+								9 & 10 & 11 & 12
+							\end{bmatrix} \\
+							AB &= 
+							\begin{bmatrix}
+								1*1 + 2*5 + 3*9 &
+								1*2 + 2*6 + 3*10 &
+								1*3 + 2*7 + 3*11 &
+								1*4 + 2*8 + 3*12 \\
+								
+								4*1 + 5*5 + 6*9 &
+								4*2 + 5*6 + 6*10 &
+								4*3 + 5*7 + 6*11 &
+								4*4 + 5*8 + 6*12
+							\end{bmatrix} \\
+							&= 
+							\begin{bmatrix}
+								1 + 10 + 27 &
+								2 + 12 + 30 &
+								3 + 14 + 33 &
+								4 + 16 + 36 \\
+								
+								4 + 25 + 54 &
+								8 + 30 + 60 &
+								12 + 35 + 66 &
+								16 + 40 + 72
+							\end{bmatrix}
+							= 
+							\begin{bmatrix}
+								38 &
+								54 &
+								50 &
+								56 \\
+								
+								83 &
+								98 &
+								113 &
+								128
+							\end{bmatrix}
+						\end{aligned}
+					$
+					%\end{equation}
+				\end{minipage}}
+				\captionof{figure}{Full example of matrix multiplication}
+				%\caption{Simple matrix multiplication example}
+			%\end{figure} \\
 			\normalsize
+			\hfill \break \\\\
 		% End of subsection - Matrix multiplication
 	% End of section 2 - Method
 	
@@ -365,4 +374,7 @@
 	
 	\bibliographystyle{plain}
 	\bibliography{biblib}
+	
+	\listoftables
+	\listoffigures
 \end{document}
