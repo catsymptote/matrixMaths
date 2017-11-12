@@ -19,6 +19,22 @@ matrix::matrix(double **mx, int m, int n)
     this->m = m;
     this->n = n;
 }
+/*
+/// Convert float** to double**
+matrix::matrix(float **mx, int m, int n)
+{
+    this->mx = mx;
+    this->m = m;
+    this->n = n;
+}
+/// Convert int** to double**
+matrix::matrix(int **mx, int m, int n)
+{
+    this->mx = mx;
+    this->m = m;
+    this->n = n;
+}
+*/
 matrix::~matrix()
 {
     //std::cout << "DIEDIEDIE!!" << std::endl;

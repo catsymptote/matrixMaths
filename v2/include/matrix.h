@@ -16,6 +16,8 @@ class matrix
         matrix();
         matrix(int m, int n);
         matrix(double **mx, int m, int n);
+        //matrix::matrix(float **mx, int m, int n);
+        //matrix::matrix(int **mx, int m, int n);
         virtual ~matrix();
 
         void getData();                         /// Get matrix data from user.
