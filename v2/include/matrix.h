@@ -29,6 +29,7 @@ class matrix
     private:
         matrix mul(matrix &X, matrix &Y);       /// Matrix multiplication.
         matrix add(matrix &X, matrix &Y);       /// Matrix addition.
+        matrix subt(matrix &X, matrix &Y);      /// Matrix subtraction.
 
         bool bMul(matrix &X, matrix &Y);        /// Matrix multiplication legality checker.
         bool bAdd(matrix &X, matrix &Y);        /// Matrix addition legality checker.
@@ -39,6 +40,7 @@ class matrix
 
     /// (Friendly) operator overloading.
     friend matrix operator+(matrix &X, matrix &Y);
+    friend matrix operator-(matrix &X, matrix &Y);
     friend matrix operator*(matrix &X, matrix &Y);
 };
 

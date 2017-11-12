@@ -129,7 +129,7 @@ matrix matrix::mul(matrix &X, matrix &Y)
 }
 
 
-/// Matrix addition.
+/// Matrix addition and subtraction.
 matrix matrix::add(matrix &X, matrix &Y)
 {
     int m = X.m;
@@ -148,6 +148,24 @@ matrix matrix::add(matrix &X, matrix &Y)
     return(Z);
 }
 
+matrix matrix::subt(matrix &X, matrix &Y)
+{
+    int m = X.m;
+    int n = X.n;
+
+    matrix Z;
+    Z.make(m, n);
+
+    for (int i = 0; i < m; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            Z.mx[i][j] = X.mx[i][j] - Y.mx[i][j];
+        }
+    }
+    return(Z);
+}
+
 
 /// Operator overloading.
 matrix operator+(matrix &X, matrix &Y)
@@ -161,6 +179,20 @@ matrix operator+(matrix &X, matrix &Y)
     }
 
     Z = Z.add(X, Y);
+    return(Z);
+}
+
+matrix operator-(matrix &X, matrix &Y)
+{
+    matrix Z;
+
+    if(!Z.bAdd(X, Y))
+    {
+        std::cout << "ERROR! !(A.m != Y.m && A.n != Y.n). Matrix addition impossible." << std::endl;
+        return(X);
+    }
+
+    Z = Z.subt(X, Y);
     return(Z);
 }
 

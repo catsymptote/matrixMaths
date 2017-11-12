@@ -12,6 +12,7 @@ int main()
     matrix *B;
     matrix *C;
     matrix *D;
+    matrix *E;
     //matrix D;
 
     /// Create the objects pointed to on the heap.
@@ -19,6 +20,7 @@ int main()
     B = new matrix;
     C = new matrix;
     D = new matrix;
+    E = new matrix;
     //std::auto_ptr<matrix> A(new matrix);
 
     /// Get data from user.
@@ -29,18 +31,21 @@ int main()
     /// Do maths using the user input.
     *C = *A * *B;
     *D = *A + *B;
+    *E = *A - *B;
 
     /// Show and print to file.
     A->show("A");
     B->show("B");
     C->show("AB");
     D->show("A+B");
+    E->show("A-B");
 
     /// Print to file formatted for Wolfram Alpha.
     A->printFileWA("A");
     B->printFileWA("B");
     C->printFileWA("AB");
     D->printFileWA("A+B");
+    E->printFileWA("A-B");
 
 
     /// Example with automatically generated matrices.
@@ -48,14 +53,17 @@ int main()
     *B = matrixGen(8, 8);
     *C = *A * *B;
     *D = *A + *B;
+    *E = *A - *B;
     A->show("X");
     B->show("Y");
     C->show("XY");
     D->show("X+Y");
+    E->show("X-Y");
     A->printFileWA("X");
     B->printFileWA("Y");
     C->printFileWA("XY");
     D->printFileWA("X+Y");
+    E->printFileWA("X-Y");
 
     /// Delete (run destructor) of objects on the heap.
     delete A;
