@@ -135,7 +135,9 @@
 	% for prettificatory reasons
 	\hfill \break
 	% Abstract
-	The assignment is to create a matrix multiplier program. It consists of three elements, where each can be cumulatively added to the program. It is to be coded in C++.
+	This is the report for the second C++ assignment in the HSN/USN Masters in System Engineering with Embedded Systems 2019 - Object Oriented Embedded Systems Programming Languages, fall 2017.
+	
+	The assignment is to create a matrix multiplier program. It consists of a few incremental improvements, where each can be cumulatively added to the program. It is to be coded in C++.
 	
 	% Horizontal line
 	%\begin{center}
@@ -347,16 +349,144 @@
 			\normalsize
 			\hfill \break \\\\
 		% End of subsection - Matrix multiplication
+		\subsection{Versions}
+			As with the previous assignment
+			[see attachment 2]
+			I wanted to fulfil the requirements incrementally, each with a new functional version.
+			I made it into two versions, where the first version upholds most of the requirements, but lacks proper memory allocation (creating objects on the heap, instead of the stack) and operator overloading.
+			The second version creates both the matrices and the arrays on the heap (using the "new" keyword).
+			It also includes operator overloading functions for multiplication (*), addition (+), and subtraction (-).
+			These are friend functions of the class, which means they are not members of the class, but has access to its private and protected members.
+			\cite{cpplang4}.
+			The second version also has added the extra test feature of automatically generating an $8 \times 8$ matrix and running it through the operators.
+		% End of subsection - Versions
+		
+		\subsection{Final code}
+			% v1 is WITHOUT memory heap stuff and operator overloading.
+			% v2 is WITH memory heap stuff and operator overloading.
+			
+			The includes the program are using:
+			\begin{lstlisting}[style=cpp]
+				#include <iostream> /// In/out stream
+				#include <fstream>  /// File stream
+				#include <sstream>  /// String stream
+			\end{lstlisting}
+
+			
+			Below are the header file, which includes the initialization of the class members and the friend functions. There are a couple of different constructors included.
+			You can find the assignment specified getData() which gets data input from the user and show() which outputs the matrix to the console for the user to see.
+			There are also two different public print methods. printFile() prints the matrix to the file in a matrix-like appearance, while printFileWA() prints the mathematics in a format made for easy copy/pasting to			\href{https://www.wolframalpha.com/}{Wolfram Alpha}
+			which is used to check if the result is correct.
+			
+			With the private members we can find the sizes of the matrix (m and n) and the matrix itself (mx). mx is a 2D array on the heap, and is created using the make() method.
+			The mathematical methods can be found here, as well as two methods to check if the mathematical operator ran is in fact a legal one.
+			
+			Finally, we have the friendly neighbour operator overloaders for +, - and * outside the namespace keywords.
+			\begin{lstlisting}[style=cpp]
+				class matrix
+				{
+					public:
+						/// Constructors and destructor.
+						matrix();
+						matrix(int m, int n);
+						matrix(double **mx, int m, int n);
+						virtual ~matrix();
+						
+						void getData();                     /// Get matrix data from user.
+						void show(std::string txt = "");    /// Display the matrix to the user.
+						
+						void printFile(std::string name);   /// Print matrix to file.
+						void printFileWA(std::string name); /// Print Wolfram Alpha format to file.
+					
+					private:
+						int m, n;       /// Matrix dimensions
+						double** mx;    /// Matrix pointers
+						
+						matrix mul(matrix &X, matrix &Y);   /// Matrix multiplication
+						matrix add(matrix &X, matrix &Y);   /// Matrix addition
+						matrix subt(matrix &X, matrix &Y); 	/// Matrix subtraction
+						
+						bool bMul(matrix &X, matrix &Y);    /// Matrix multiplication legality checker.
+						bool bAdd(matrix &X, matrix &Y);  	/// Matrix addition legality checker.
+						
+						void printToFile(std::string text, std::string filename);   /// Create file from string.
+						
+						void make(int m, int n);    /// Make the (local) matrix based on size inputs.
+					
+					/// (Friendly) operator overloading.
+					friend matrix operator+(matrix &X, matrix &Y);
+					friend matrix operator-(matrix &X, matrix &Y);
+					friend matrix operator*(matrix &X, matrix &Y);
+				};
+			\end{lstlisting}
+			The rest of the source code can be found in the git repository on the github link (see bottom of document), or in the attachments (attachment 1).
+		% End of subsection - Version 2
 	% End of section 2 - Method
 	
 	
 	\section{Result}
-		
+		The resulting program can add, subtract and multiply matrices specified by the user, as well as test matrices specified in the source code.
+		The user can input the code by first typing the size (m n) of the first matrix, then input row by row like the following:
+		\begin{lstlisting}[style=console]
+			Input matrix dimensions: m n> 2 2
+			1 2
+			3 4
+			Input matrix dimensions: m n> 2 2
+			5 6
+			7 8
+		\end{lstlisting}
+		Note that the same information can be filled in in a single line like the following:
+		\begin{lstlisting}[style=console]
+			Input matrix dimensions: m n> 2 2 1 2 3 4 2 2 5 6 7 8
+			Input matrix dimensions: m n>
+		\end{lstlisting}
+		This will then output the results from the different mathematical operations using the two matrices:
+		\begin{lstlisting}[style=console]
+			A
+			---------
+			1       2
+			
+			3       4
+			---------
+			
+			B
+			---------
+			5       6
+			
+			7       8
+			---------
+			
+			AB
+			----------
+			19      22
+			
+			43      50
+			----------
+			
+			A+B
+			----------
+			6       8
+			
+			10      12
+			----------
+			
+			A-B
+			----------
+			-4      -4
+			
+			-4      -4
+			----------
+		\end{lstlisting}
+		The program also outputs the automatically generated test matrices X and Y and their results.
 	% End of section 3 - Results
 	
 	
 	\section{Discussion}
 		[the maths itself takes a lot less time than the rest of the programming]
+		One of the things I noticed was rather different with this assignment compared to the first one
+		[see attachment 2]
+		was that the mathematical and numerical logic was far less of the total work on this task.
+		What took most of the time was the programming-related aspects of the code.
 	% End of section 4 - Discussion
 	
 	% Horizontal line
@@ -370,11 +500,25 @@
 	\href{https://github.com/catsymptote/matrixMaths.git}{.git}
 	
 	
+	
+	
+	
 	\clearpage
+	
+	
+	\setcounter{secnumdepth}{0} %% no numbering
+	\hfill \break
+	\section{Attachments}
+	\begin{enumerate}
+		\item Source code for this project - "matrixMaths.zip"
+		\item Report for previous assignment - "calculator_report.pdf"
+	\end{enumerate}
+	
 	
 	\bibliographystyle{plain}
 	\bibliography{biblib}
 	
-	\listoftables
+	%\listoftables
 	\listoffigures
+		
 \end{document}
