@@ -1,7 +1,7 @@
 #include "matrix.h"
 
 #include <iostream>
-#include <memory>
+//#include <memory>
 
 
 matrix matrixGen(int m, int n);
@@ -46,6 +46,7 @@ int main()
     C->printFileWA("AB");
     D->printFileWA("A+B");
     E->printFileWA("A-B");
+
 
 
     /// Example with automatically generated matrices.

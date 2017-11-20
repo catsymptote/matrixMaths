@@ -1,23 +1,20 @@
 #ifndef MATRIX_H
 #define MATRIX_H
 
-#include <iostream>
-#include <fstream>
-#include <sstream>
+#include <iostream> /// In/out stream
+#include <fstream>  /// File stream
+#include <sstream>  /// String stream
 
 
 class matrix
 {
     public:
-        int m, n;       /// Matrix dimensions
-        double** mx;    /// Matrix pointers
-
         /// Constructors and destructor.
         matrix();
         matrix(int m, int n);
         matrix(double **mx, int m, int n);
-        //matrix::matrix(float **mx, int m, int n);
-        //matrix::matrix(int **mx, int m, int n);
+        //matrix(float **mx, int m, int n);
+        //matrix(int **mx, int m, int n);
         virtual ~matrix();
 
         void getData();                         /// Get matrix data from user.
@@ -27,6 +24,9 @@ class matrix
         void printFileWA(std::string name);     /// Print Wolfram Alpha format to file.
 
     private:
+        int m, n;       /// Matrix dimensions
+        double** mx;    /// Matrix pointers
+
         matrix mul(matrix &X, matrix &Y);       /// Matrix multiplication.
         matrix add(matrix &X, matrix &Y);       /// Matrix addition.
         matrix subt(matrix &X, matrix &Y);      /// Matrix subtraction.

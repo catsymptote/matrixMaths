@@ -38,6 +38,13 @@ matrix::matrix(int **mx, int m, int n)
 matrix::~matrix()
 {
     //std::cout << "DIEDIEDIE!!" << std::endl;
+    /* // How do you even destructor?
+    for(int i = 0; i < m; i++)
+    {
+        delete [] this->mx[i];
+    }
+    delete []mx;
+    */
 }
 
 
@@ -152,7 +159,6 @@ matrix matrix::subt(matrix &X, matrix &Y)
 {
     int m = X.m;
     int n = X.n;
-
     matrix Z;
     Z.make(m, n);
 
