@@ -6,6 +6,7 @@
 *.pdf
 ignore/
 Report/calc*
+Deliverables/
 *.layout
 *.depend
 .vscode/
